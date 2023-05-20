@@ -11,6 +11,8 @@ from gaze_tracker import GazeTracker
 from calibration import calibrate
 from screen import Screen
 
+#URL = "http://192.168.31.98:4747/video"
+
 RES_SCREEN=pyautogui.size()
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
@@ -21,7 +23,12 @@ def nothing(val):
     pass
 
 def main():
-    camera = cv2.VideoCapture(0)
+    source=int(input("Enter 1 to use built in webcam or 2 to use remote camera : "))
+    if(source==1):
+        URL=0
+    elif (source==2):
+        URL=input("Enter the URL for video stream within quotations : ")
+    camera = cv2.VideoCapture(URL)
     camera.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
     camera.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 
